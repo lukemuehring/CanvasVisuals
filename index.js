@@ -5,14 +5,18 @@ c.canvas.width = window.innerWidth;
 c.canvas.height = window.innerHeight;
 
 var FrameCount = 0;
-var specialOne = 0;
 
-function handlerFunction() {
-	c.fillStyle = "black";
+function handlerFunction(initialBgColor) {
+	let randomNum = Math.abs(Math.cos(FrameCount));
+	if (initialBgColor) {
+		c.fillStyle = "rgb(" + initialBgColor + ")";
+	} else {
+		c.fillStyle = "rgb(" + randomNum * 255 + " " + randomNum * 30 + " " + "0 / " + 25 + "%)";
+	}
 	c.fillRect(0,0,c.canvas.width, c.canvas.height);
 }
 
-let intervalID = setInterval(handlerFunction, 411)
+let intervalID = setInterval(handlerFunction, 455)
 
 const loop = function () {
 	c.fillStyle = "red";
@@ -24,10 +28,9 @@ const loop = function () {
 	}
 	window.requestAnimationFrame(loop);
 	FrameCount++;
-	
-	console.log(FrameCount);
 }
 
+handlerFunction("0 0 0");
 loop();
 
 
